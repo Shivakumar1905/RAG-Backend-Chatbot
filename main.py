@@ -25,13 +25,17 @@ load_dotenv()
 
 app = FastAPI(title="RAG Chatbot API")
 
-ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=[
+        "https://rag-frontend-chatbot-kdhk.vercel.app/", 
+        "http://localhost:3000",
+        "http://localhost:8000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 COLLECTION_NAME = "rag_collection"
